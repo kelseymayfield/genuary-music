@@ -1,0 +1,93 @@
+<!DOCTYPE html lang="en">
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@magenta/music@^1.0.0"></script>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+    <div class="midi-wrapper">
+        <div class="sharps-wrapper">
+            <button id="c-sharp" class="note-button">
+                C♯
+            </button>
+            <button id="d-sharp" class="note-button">
+                D♯
+            </button>
+            <button id="f-sharp" class="note-button">
+                F♯
+            </button>
+            <button id="g-sharp" class="note-button">
+                G♯
+            </button>
+            <button id="a-sharp" class="note-button">
+                A♯
+            </button>
+        </div>
+        <div class="natural-wrapper">
+            <button id="c" class="note-button">
+                C
+            </button>
+            <button id="d" class="note-button">
+                D
+            </button>
+            <button id="e" class="note-button">
+                E
+            </button>
+            <button id="f" class="note-button">
+                F
+            </button>
+            <button id="g" class="note-button">
+                G
+            </button>
+            <button id="a" class="note-button">
+                A
+            </button>
+            <button id="b" class="note-button">
+                B
+            </button>
+        </div>
+    </div>
+</body>
+<script>
+    let player = new mm.Player();
+    let buttons = document.getElementsByClassName('note-button');
+    console.log(buttons);
+    for (let element of buttons) {
+        element.addEventListener('click', function() {
+            let noteValue;
+            if (element.id === 'c') {
+                noteValue = 60;
+            } else if (element.id === 'c-sharp') {
+                noteValue = 61;
+            } else if (element.id === 'd') {
+                noteValue = 62;
+            } else if (element.id === 'd-sharp') {
+                noteValue = 63;
+            } else if (element.id === 'e') {
+                noteValue = 64;
+            } else if (element.id === 'f') {
+                noteValue = 65;
+            } else if (element.id === 'f-sharp') {
+                noteValue = 66;
+            } else if (element.id === 'g') {
+                noteValue = 67;
+            } else if (element.id === 'g-sharp') {
+                noteValue = 68;
+            } else if (element.id === 'a') {
+                noteValue = 69;
+            } else if (element.id === 'a-sharp') {
+                noteValue = 70;
+            } else if (element.id === 'b') {
+                noteValue = 71;
+            }
+            REALTIME_NOTE = {notes: [
+                {pitch: noteValue, startTime: 0.0, endTime: 0.5}
+            ]};
+            console.log(REALTIME_NOTE);
+            player.stop();
+            player.start(REALTIME_NOTE);
+        });
+    }
+</script>
+</html>

@@ -1,0 +1,23 @@
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: rgb(24, 32, 38);
+    color: aliceblue;
+    width: 100%;
+}
+
+.midi-wrapper {
+    padding-block: 20%;
+    margin-inline: auto;
+    width: fit-content;
+}
+
+.midi-wrapper button {
+    font-size: 4rem;
+    padding: 20px;
+}
