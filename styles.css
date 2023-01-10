@@ -82,10 +82,15 @@ body {
     width: 5em;
     height: 5em;
     background-color: var(--note-color);
+    border: 1px solid grey;
+}
+
+.melody-button:hover {
+    border-color: white;
 }
 
 .melody-button.selected {
-    border: 2px solid blue;
+    border: 2px solid white;
 }
 
 .play-button-wrapper {
