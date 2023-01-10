@@ -60,21 +60,28 @@
     </div>
     <div class="play-button-wrapper">
         <button id="play-button">Play</button>
+        <button id="generate-button">Generate</button>
     </div>
 </body>
 <script>
     let player = new mm.Player();
+    const music_rnn = new mm.MusicRNN('https://storage.googleapis.com/magentadata/js/checkpoints/music_rnn/basic_rnn');
+    music_rnn.initialize();
+    const rnnPlayer = new mm.Player();
 
     const selectedNotes = Array(8);
 
     let noteButtons = document.getElementsByClassName('note-button');
     let melodyButtons = document.getElementsByClassName('melody-button');
     let playButton = document.getElementById('play-button');
+    let generateButton = document.getElementById('generate-button');
    
     for (let element of noteButtons) {
         element.addEventListener('click', function() {
             const melodyButton = getSelectedMelodyButton();
-            melodyButton.classList = `melody-button selected ${element.id}`;
+            if (melodyButton) {
+                melodyButton.classList = `melody-button selected ${element.id}`;
+            }
             
             const re = /note-([1-8])/;
             const melodyButtonIndex = melodyButton.id.match(re)[1];
@@ -117,8 +124,30 @@
             }
         }
         player.stop();
-        player.start({notes});
-    })
+        player.start({notes, totalTime: 8});
+    });
+
+    generateButton.addEventListener('click', function() {
+        const notes = [];
+        let numNotes = 0;
+        for (let i = 0; i < 8; i++) {
+            if (selectedNotes[i]) {
+                numNotes++;
+                notes.push({
+                    pitch: selectedNotes[i],
+                    startTime: i * 0.5,
+                    endTime: i * 0.5 + 0.5
+                });
+            }
+        }
+        if (player.isPlaying()) {
+            player.stop();
+        }
+        const qns = mm.sequences.quantizeNoteSequence({notes, totalTime: 8}, 4);
+        music_rnn.continueSequence(qns, 20, 1.5).then((sample) => {
+            player.start(sample);
+        });
+    });
 
     function getSelectedMelodyButton() {
         for (let element of melodyButtons) {
