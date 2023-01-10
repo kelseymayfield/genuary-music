@@ -12,12 +12,74 @@ body {
 }
 
 .midi-wrapper {
-    padding-block: 20%;
+    padding-block: 40px;
     margin-inline: auto;
     width: fit-content;
 }
 
 .midi-wrapper button {
-    font-size: 4rem;
-    padding: 20px;
+    font-size: 3rem;
+    color: rgb(24, 32, 38);
+    width: 3ch;
+    height: 3em;
+    border: 2px solid rgb(24, 32, 38);
+    border-radius: 0 0 1.5ch 1.5ch;
+    margin: 10px;
+    box-shadow: 0 0 15px 5px var(--note-glow);
+}
+
+.sharps-wrapper {
+    padding-bottom: 20px;
+    padding-inline: 3em;
+}
+
+#d-sharp {
+    margin-right: 2.5em;
+}
+#c {
+    --note-glow: indianred;
+}
+#c-sharp {
+    --note-glow: hotpink;
+}
+#d {
+    --note-glow: lightsalmon;
+}
+#d-sharp {
+    --note-glow: orange;
+}
+#e {
+    --note-glow: gold;
+}
+#f {
+    --note-glow: yellowgreen;
+}
+#f-sharp {
+    --note-glow: lime;
+}
+#g {
+    --note-glow: mediumaquamarine;
+}
+#g-sharp {
+    --note-glow: teal;
+}
+#a {
+    --note-glow: steelblue;
+}
+#a-sharp {
+    --note-glow: mediumslateblue;
+}
+#b {
+    --note-glow: mediumpurple;
+}
+
+@media screen and (max-width: 730px) {
+    .midi-wrapper button {
+        font-size: 2rem;
+    }
+}
+@media screen and (max-width: 520px) {
+    .midi-wrapper button {
+        font-size: 1rem;
+    }
 }
