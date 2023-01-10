@@ -48,46 +48,113 @@
             </button>
         </div>
     </div>
+    <div class="melody-selection">
+        <button class="melody-button" id="note-1"></button>
+        <button class="melody-button" id="note-2"></button>
+        <button class="melody-button" id="note-3"></button>
+        <button class="melody-button" id="note-4"></button>
+        <button class="melody-button" id="note-5"></button>
+        <button class="melody-button" id="note-6"></button>
+        <button class="melody-button" id="note-7"></button>
+        <button class="melody-button" id="note-8"></button>
+    </div>
+    <div class="play-button-wrapper">
+        <button id="play-button">Play</button>
+    </div>
 </body>
 <script>
     let player = new mm.Player();
-    let buttons = document.getElementsByClassName('note-button');
-    console.log(buttons);
-    for (let element of buttons) {
+
+    const selectedNotes = Array(8);
+
+    let noteButtons = document.getElementsByClassName('note-button');
+    let melodyButtons = document.getElementsByClassName('melody-button');
+    let playButton = document.getElementById('play-button');
+   
+    for (let element of noteButtons) {
         element.addEventListener('click', function() {
-            let noteValue;
-            if (element.id === 'c') {
-                noteValue = 60;
-            } else if (element.id === 'c-sharp') {
-                noteValue = 61;
-            } else if (element.id === 'd') {
-                noteValue = 62;
-            } else if (element.id === 'd-sharp') {
-                noteValue = 63;
-            } else if (element.id === 'e') {
-                noteValue = 64;
-            } else if (element.id === 'f') {
-                noteValue = 65;
-            } else if (element.id === 'f-sharp') {
-                noteValue = 66;
-            } else if (element.id === 'g') {
-                noteValue = 67;
-            } else if (element.id === 'g-sharp') {
-                noteValue = 68;
-            } else if (element.id === 'a') {
-                noteValue = 69;
-            } else if (element.id === 'a-sharp') {
-                noteValue = 70;
-            } else if (element.id === 'b') {
-                noteValue = 71;
-            }
+            const melodyButton = getSelectedMelodyButton();
+            melodyButton.classList = `melody-button selected ${element.id}`;
+            
+            const re = /note-([1-8])/;
+            const melodyButtonIndex = melodyButton.id.match(re)[1];
+            let noteValue = getValueForNote(element.id);
+
+            selectedNotes[melodyButtonIndex] = noteValue;
             REALTIME_NOTE = {notes: [
                 {pitch: noteValue, startTime: 0.0, endTime: 0.5}
             ]};
-            console.log(REALTIME_NOTE);
             player.stop();
             player.start(REALTIME_NOTE);
         });
+    }
+
+    for (let element of melodyButtons) {
+        element.addEventListener('click', function() {
+            if (element.classList.contains('selected')) {
+                element.classList.remove('selected');
+            } else {
+                element.classList.add('selected');
+                for (let melodyButton of melodyButtons) {
+                    if (melodyButton !== element &&
+                        melodyButton.classList.contains('selected')) {
+                        melodyButton.classList.remove('selected');
+                    }
+                }
+            }
+        });
+    }
+
+    playButton.addEventListener('click', function() {
+        const notes = [];
+        for (let i = 0; i < 8; i++) {
+            if (selectedNotes[i]) {
+                notes.push({
+                    pitch: selectedNotes[i],
+                    startTime: i * 0.5,
+                    endTime: i * 0.5 + 0.5
+                });
+            }
+        }
+        player.stop();
+        player.start({notes});
+    })
+
+    function getSelectedMelodyButton() {
+        for (let element of melodyButtons) {
+            if (element.classList.contains('selected')) {
+                return element;
+            }
+        }
+    }
+
+    function getValueForNote(noteName) {
+        if (noteName === 'c') {
+            noteValue = 60;
+        } else if (noteName === 'c-sharp') {
+            noteValue = 61;
+        } else if (noteName === 'd') {
+            noteValue = 62;
+        } else if (noteName === 'd-sharp') {
+            noteValue = 63;
+        } else if (noteName === 'e') {
+            noteValue = 64;
+        } else if (noteName === 'f') {
+            noteValue = 65;
+        } else if (noteName === 'f-sharp') {
+            noteValue = 66;
+        } else if (noteName === 'g') {
+            noteValue = 67;
+        } else if (noteName === 'g-sharp') {
+            noteValue = 68;
+        } else if (noteName === 'a') {
+            noteValue = 69;
+        } else if (noteName === 'a-sharp') {
+            noteValue = 70;
+        } else if (noteName === 'b') {
+            noteValue = 71;
+        }
+        return noteValue;
     }
 </script>
 </html>

@@ -25,7 +25,7 @@ body {
     border: 2px solid rgb(24, 32, 38);
     border-radius: 0 0 1.5ch 1.5ch;
     margin: 10px;
-    box-shadow: 0 0 15px 5px var(--note-glow);
+    box-shadow: 0 0 15px 5px var(--note-color);
 }
 
 .sharps-wrapper {
@@ -36,41 +36,67 @@ body {
 #d-sharp {
     margin-right: 2.5em;
 }
-#c {
-    --note-glow: indianred;
+#c, .c {
+    --note-color: indianred;
 }
-#c-sharp {
-    --note-glow: hotpink;
+#c-sharp, .c-sharp {
+    --note-color: hotpink;
 }
-#d {
-    --note-glow: lightsalmon;
+#d, .d {
+    --note-color: lightsalmon;
 }
-#d-sharp {
-    --note-glow: orange;
+#d-sharp, .d-sharp {
+    --note-color: orange;
 }
-#e {
-    --note-glow: gold;
+#e, .e {
+    --note-color: gold;
 }
-#f {
-    --note-glow: yellowgreen;
+#f, .f {
+    --note-color: yellowgreen;
 }
-#f-sharp {
-    --note-glow: lime;
+#f-sharp, .f-sharp {
+    --note-color: lime;
 }
-#g {
-    --note-glow: mediumaquamarine;
+#g, .g {
+    --note-color: mediumaquamarine;
 }
-#g-sharp {
-    --note-glow: teal;
+#g-sharp, .g-sharp {
+    --note-color: teal;
 }
-#a {
-    --note-glow: steelblue;
+#a, .a {
+    --note-color: steelblue;
 }
-#a-sharp {
-    --note-glow: mediumslateblue;
+#a-sharp, .a-sharp {
+    --note-color: mediumslateblue;
 }
-#b {
-    --note-glow: mediumpurple;
+#b, .b {
+    --note-color: mediumpurple;
+}
+
+.melody-selection {
+    margin-inline: auto;
+    width: fit-content;
+}
+
+.melody-button {
+    width: 5em;
+    height: 5em;
+    background-color: var(--note-color);
+}
+
+.melody-button.selected {
+    border: 2px solid blue;
+}
+
+.play-button-wrapper {
+    margin-inline: auto;
+    width: fit-content;
+    padding-top: 40px;
+}
+
+#play-button {
+    font-size: 1.5rem;
+    padding: 0.25em;
 }
 
 @media screen and (max-width: 730px) {
