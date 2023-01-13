@@ -65,7 +65,7 @@
 </body>
 <script>
     let player = new mm.Player();
-    mm.player.tone.context.resume();
+    mm.Player.tone.context.resume();
     const music_rnn = new mm.MusicRNN('https://storage.googleapis.com/magentadata/js/checkpoints/music_rnn/basic_rnn');
     music_rnn.initialize();
     const rnnPlayer = new mm.Player();
